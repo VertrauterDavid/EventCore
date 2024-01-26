@@ -25,6 +25,8 @@ public class EventCore extends JavaPlugin {
     private GameManager gameManager;
     private KitManager kitManager;
 
+    // test
+
     @Override
     public void onEnable() {
         saveDefaultConfig();
