@@ -20,20 +20,20 @@ public class EventCore extends JavaPlugin {
 
     @Getter
     private static EventCore instance;
+    private VersionUtil versionUtil;
     private MapManager mapManager;
     private GameManager gameManager;
     private KitManager kitManager;
-    private VersionUtil versionUtil;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
 
         instance = this;
+        versionUtil = new VersionUtil();
         mapManager = new MapManager();
         gameManager = new GameManager();
         kitManager = new KitManager();
-        versionUtil = new VersionUtil();
 
         new EventCommand("event");
         new KitCommand("kit");
