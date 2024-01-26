@@ -74,7 +74,7 @@ public class PlaceholderHook extends PlaceholderExpansion {
         if (params.equals("kd")) {
             double kills = player.getStatistic(Statistic.PLAYER_KILLS);
             double deaths = player.getStatistic(Statistic.DEATHS);
-            return new DecimalFormat("#0.00").format((deaths == 0 ? kills : (kills / deaths)));
+            return new DecimalFormat("#0.00").format(Math.max(0D, (deaths == 0 ? kills : (kills / deaths))));
         }
 
         if (params.equals("totems")) {
