@@ -1,0 +1,85 @@
+# ---------------------------------------------------------------------------
+#
+#       ______                          _      _____
+#     |  ____|                        | |    / ____|
+#     | |__    __   __   ___   _ __   | |_  | |        ___    _ __    ___
+#     |  __|   \ \ / /  / _ \ | '_ \  | __| | |       / _ \  | '__|  / _ \
+#     | |____   \ V /  |  __/ | | | | | |_  | |____  | (_) | | |    |  __/
+#     |______|   \_/    \___| |_| |_|  \__|  \_____|  \___/  |_|     \___|
+#
+#         Developed by VertrauterDavid
+#
+#         https://vertrauterdavid.net/
+#         https://github.com/VertrauterDavid/
+#
+# ---------------------------------------------------------------------------
+
+Settings:
+  SpawnLocation: 'world/0/200/0' # Change the setting only with '/event settings'
+  DisableFallDamage: true # Disable fall damage
+  DisableItemExplosions: true # Disable item explosions for End Crystal
+  WorldBorder:
+    DefaultSize: 200 # Default size before and after the event
+    DisableEnderPeals: true # Disable EnderPeals outside the world border
+    Boost: # Boost players who are outside the border into the border
+      Enabled: true
+      StrengthXZ: 1.3 # Strength in X and Z direction
+      StrengthY: 0.1 # Strength in Y direction
+    Damage:
+      Buffer: 0.0 # It is recommended to use '0' if the boost is activated
+      Amount: 0.2 # Damage per block
+  Drop:
+    Pos1: '-100,0,-100' # Change the setting only with '/event settings'
+    Pos2: '100,100,100' # Change the setting only with '/event settings'
+    Commands: # Commands that are executed by the console for drop - it is recommended to use FastAsyncWorldEdit
+      - "//world world"
+      - "//pos1 %pos1%"
+      - "//pos2 %pos2%"
+      - "//set 0"
+  AutoStop1Player: true # Automatically stop the event if only one player is alive
+  AllowItemDropBeforeStart: true # Allow item drop and pickup before the event starts
+  DropOnPlayerCount:
+    Enabled: true
+    Count: 15
+
+Messages:
+  Prefix: "&8 | &#559effEvent &8» &7"
+  PlayerJoin:
+    Enabled: true
+    Message: "&a%player% &7joined the Event!"
+  PlayerQuit:
+    Enabled: true
+    Message: "&c%player% &7left the Event!"
+  PlayerDeath:
+    Enabled: true
+    Prefix: "&8 | &c☠ &8» &7" # Prefix before the death message
+    HighlightColor: "&c" # Highlight color for player names
+  StartTimer:
+    Message: "The game starts in &c%timer% second(s)!"
+    Title: "%timer%"
+    Colors:
+      1sec: "&a"
+      2sec: "&e"
+      3sec: "&6"
+      4sec: "&c"
+      5sec: "&4"
+  Start:
+    Message: "&aThe game starts now! Good luck!"
+    Title: "&aStart!"
+  Stop:
+    Enabled: true
+    Message: "&cThe game has ended! The winner is %winner%"
+    Title: "&c%winner%" # 1st row
+    SubTitle: "&7is the winner" # 2nd row
+
+AutoBroadcast: # Messages that are automatically broadcasted
+  Enabled: true
+  Interval: 60 # Interval in seconds
+  Messages:
+    - "&7Use &a/buy &7to support us and unlock cool features"
+    - "&7You can also join our Discord with &c/discord"
+  UseBroadcastCommand: false # Activate whether the 'BroadcastCommand' command should be used
+  BroadcastCommand: "/bc %message%"
+
+Kit: # Change the setting only with '/event settings'
+  Kit: '-'
