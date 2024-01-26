@@ -26,6 +26,7 @@ public class GameManager {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (timer > 0) {
                     String color = MessageUtil.get("Messages.StartTimer.Colors." + timer + "sec");
+
                     player.sendMessage(MessageUtil.getPrefix() + MessageUtil.get("Messages.StartTimer.Message").replaceAll("%timer%", color + timer + "§7"));
                     player.sendTitle(MessageUtil.get("Messages.StartTimer.Title").replaceAll("%timer%", color + timer + "§7"), " ");
                     player.playSound(player.getLocation(), Sound.ENTITY_CHICKEN_EGG, 5, 5);
@@ -33,9 +34,11 @@ public class GameManager {
                     player.sendMessage(MessageUtil.getPrefix() + MessageUtil.get("Messages.Start.Message"));
                     player.sendTitle(MessageUtil.get("Messages.Start.Title"), " ");
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
+
                     for (World world : Bukkit.getWorlds()) {
                         world.setDifficulty(Difficulty.HARD);
                     }
+
                     running = true;
                     task.cancel();
                 }
@@ -70,10 +73,12 @@ public class GameManager {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
             PlayerUtil.cleanPlayer(player);
         }
+
         for (World world : Bukkit.getWorlds()) {
             world.setDifficulty(Difficulty.PEACEFUL);
             world.getWorldBorder().setSize(200);
         }
+
         running = false;
         BorderUtil.lastOptimal = 200;
     }

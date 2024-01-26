@@ -48,6 +48,7 @@ public class VersionUtil {
         if (this.newestVersion != -1) {
             return this.newestVersion;
         }
+
         try {
             HttpURLConnection httpURLConnection = (HttpURLConnection) new URL("https://api.vertrauterdavid.net/plugins/checkVersionFree.php").openConnection();
             httpURLConnection.setRequestMethod("POST");
@@ -57,6 +58,7 @@ public class VersionUtil {
             httpURLConnection.getResponseCode();
             return Double.parseDouble(new String(httpURLConnection.getInputStream().readAllBytes(), StandardCharsets.UTF_8));
         } catch (Exception ignored) { }
+
         return 0;
     }
 
@@ -64,10 +66,13 @@ public class VersionUtil {
         if (this.currentVersion != -1) {
             return this.currentVersion;
         }
+
         double currentVersion = 0;
+
         try {
             currentVersion = Double.parseDouble(EventCore.getInstance().getDescription().getVersion());
         } catch (NumberFormatException ignored) { }
+
         return currentVersion;
     }
 

@@ -23,6 +23,7 @@ public class KitManager {
     public void give(Player player) {
         player.getInventory().setArmorContents(null);
         player.getInventory().clear();
+
         for (int i = 0; i < 41; i++) {
             player.getInventory().setItem(i, loaded.get(i));
         }
@@ -31,15 +32,18 @@ public class KitManager {
     private void load() {
         HashMap<Integer, ItemStack> map = new HashMap<>();
         String base64 = EventCore.getInstance().getConfig().getString("Kit.Kit", "-");
+
         if (!(base64.equalsIgnoreCase("-"))) {
             try {
                 ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(Base64Coder.decodeLines(base64));
                 BukkitObjectInputStream bukkitObjectInputStream = new BukkitObjectInputStream(byteArrayInputStream);
+
                 for (int i = 0; i < 41; i++) {
                     map.put(i, (ItemStack) bukkitObjectInputStream.readObject());
                 }
             } catch (Exception ignored) { }
         }
+
         loaded = map;
     }
 
@@ -47,14 +51,18 @@ public class KitManager {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             BukkitObjectOutputStream bukkitObjectOutputStream = new BukkitObjectOutputStream(byteArrayOutputStream);
+
             for (int i = 0; i < 41; i++) {
                 bukkitObjectOutputStream.writeObject(player.getInventory().getItem(i));
             }
+
             bukkitObjectOutputStream.close();
             String base64 = Base64Coder.encodeLines(byteArrayOutputStream.toByteArray());
             EventCore.getInstance().getConfig().set("Kit.Kit", base64);
             EventCore.getInstance().saveConfig();
+
             load();
+
             player.sendMessage(MessageUtil.getPrefix() + "§aKit has been saved successfully!");
         } catch (Exception exception) {
             player.sendMessage(MessageUtil.getPrefix() + "§cFailed to save!");

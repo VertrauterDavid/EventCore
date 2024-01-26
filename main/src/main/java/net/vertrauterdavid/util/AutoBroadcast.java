@@ -21,9 +21,11 @@ public class AutoBroadcast implements Runnable {
         if (messages.isEmpty()) {
             return;
         }
+
         if (index >= messages.size()) {
             index = 0;
         }
+
         String message = messages.get(index);
         if (EventCore.getInstance().getConfig().getBoolean("AutoBroadcast.UseBroadcastCommand")) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), EventCore.getInstance().getConfig().getString("AutoBroadcast.BroadcastCommand", "").replaceAll("%message%", message));
@@ -36,6 +38,7 @@ public class AutoBroadcast implements Runnable {
                 player.sendMessage(" ");
             }
         }
+
         index++;
     }
 
