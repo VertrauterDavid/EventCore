@@ -5,6 +5,7 @@ import net.vertrauterdavid.util.BorderUtil;
 import net.vertrauterdavid.util.ItemUtil;
 import net.vertrauterdavid.util.MessageUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -43,6 +44,11 @@ public class EventCommand implements CommandExecutor, TabCompleter {
                 return false;
             }
 
+            if (args[0].equalsIgnoreCase("stop")) {
+                player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event stop <winner>");
+                return false;
+            }
+
             if (args[0].equalsIgnoreCase("drop")) {
                 EventCore.getInstance().getMapManager().drop();
                 return false;
@@ -54,6 +60,35 @@ public class EventCommand implements CommandExecutor, TabCompleter {
                 inventory.setItem(4 + 9, new ItemUtil(Material.COMPASS).setName("§aSet spawn location").toItemStack());
                 inventory.setItem(6 + 9, new ItemUtil(Material.DIAMOND_CHESTPLATE).setName("§aSave Kit").toItemStack());
                 player.openInventory(inventory);
+                return false;
+            }
+
+            if (args[0].equalsIgnoreCase("kickspec")) {
+                for (Player target : Bukkit.getOnlinePlayers()) {
+                    if (!(target.hasPermission("event.spec")) && target.getGameMode() == GameMode.SPECTATOR) {
+                        target.kickPlayer(" ");
+                    }
+                }
+                player.sendMessage(MessageUtil.getPrefix() + "All spectators have been kicked!");
+                return false;
+            }
+
+            if (args[0].equalsIgnoreCase("kickall")) {
+                for (Player target : Bukkit.getOnlinePlayers()) {
+                    if (!(target.hasPermission("event.spec"))) {
+                        target.kickPlayer(" ");
+                    }
+                }
+                player.sendMessage(MessageUtil.getPrefix() + "All players have been kicked!");
+                return false;
+            }
+
+            if (args[0].equalsIgnoreCase("clearall")) {
+                for (Player target : Bukkit.getOnlinePlayers()) {
+                    target.getInventory().setArmorContents(null);
+                    target.getInventory().clear();
+                }
+                player.sendMessage(MessageUtil.getPrefix() + "All players have been cleared!");
                 return false;
             }
         }
@@ -99,6 +134,9 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event drop");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event autoBorder <on / off>");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event settings");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event kickspec");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event kickall");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event clearall");
         player.sendMessage(" ");
         return false;
     }
@@ -121,7 +159,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            list.addAll(Arrays.asList("start", "stop", "drop", "autoBorder", "settings"));
+            list.addAll(Arrays.asList("start", "stop", "drop", "autoBorder", "settings", "kickspec", "kickall", "clearall"));
         }
 
         try {

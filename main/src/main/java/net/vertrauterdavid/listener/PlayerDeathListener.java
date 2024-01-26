@@ -3,7 +3,6 @@ package net.vertrauterdavid.listener;
 import net.vertrauterdavid.EventCore;
 import net.vertrauterdavid.util.MessageUtil;
 import net.vertrauterdavid.util.PlayerUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,11 +16,11 @@ public class PlayerDeathListener implements Listener {
         Player player = event.getEntity();
 
         if (EventCore.getInstance().getConfig().getBoolean("Messages.PlayerDeath.Enabled")) {
-            String message = event.getDeathMessage();
-            for (Player player2 : Bukkit.getOnlinePlayers()) {
-                message = message.replaceAll(player2.getName(), MessageUtil.get("Messages.PlayerDeath.HighlightColor") + player2.getName() + "§7");
+            if (player.getKiller() != null) {
+                event.setDeathMessage(MessageUtil.get("Messages.PlayerDeath.Message1").replaceAll("%player%", player.getName()).replaceAll("%killer%", player.getKiller().getName()));
+            } else {
+                event.setDeathMessage(MessageUtil.get("Messages.PlayerDeath.Message2").replaceAll("%player%", player.getName()));
             }
-            event.setDeathMessage(MessageUtil.get("Messages.PlayerDeath.Prefix") + message);
         } else {
             event.setDeathMessage("");
         }

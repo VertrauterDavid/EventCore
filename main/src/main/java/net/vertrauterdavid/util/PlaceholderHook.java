@@ -3,11 +3,14 @@ package net.vertrauterdavid.util;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +43,8 @@ public class PlaceholderHook extends PlaceholderExpansion {
                 "alive",
                 "kills",
                 "deaths",
+                "kd",
+                "totems",
                 "border",
                 "ping",
                 "tps"
@@ -64,6 +69,24 @@ public class PlaceholderHook extends PlaceholderExpansion {
 
         if (params.equals("deaths")) {
             return String.valueOf(player.getStatistic(Statistic.DEATHS));
+        }
+
+        if (params.equals("kd")) {
+            double kills = player.getStatistic(Statistic.PLAYER_KILLS);
+            double deaths = player.getStatistic(Statistic.DEATHS);
+            return new DecimalFormat("#0.00").format((deaths == 0 ? kills : (kills / deaths)));
+        }
+
+        if (params.equals("totems")) {
+            int count = 0;
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if (itemStack != null) {
+                    if (itemStack.getType() == Material.TOTEM_OF_UNDYING) {
+                        count++;
+                    }
+                }
+            }
+            return String.valueOf(count);
         }
 
         if (params.equals("border")) {

@@ -41,6 +41,9 @@ Settings:
   DropOnPlayerCount:
     Enabled: true
     Count: 15
+  IngameTimer:
+    Enabled: true
+    Format: "&8» &chh:mm:ss &8«" # Format of the timer - hh = hours, mm = minutes, ss = seconds
 
 Messages:
   Prefix: "&8 | &#559effEvent &8» &7"
@@ -52,10 +55,11 @@ Messages:
     Message: "&c%player% &7left the Event!"
   PlayerDeath:
     Enabled: true
-    Prefix: "&8 | &c☠ &8» &7" # Prefix before the death message
-    HighlightColor: "&c" # Highlight color for player names
+    Message1: "&8 | &c☠ &8» &c%player% &7was killed by &c%killer%&7!"
+    Message2: "&8 | &c☠ &8» &c%player% &7died!" # Message when the player has simply died and there is no killer!
   StartTimer:
-    Message: "The game starts in &c%timer% second(s)!"
+    Timer: 5 # Timer in seconds
+    Message: "The game starts in &c%timer% seconds!"
     Title: "%timer%"
     Colors:
       1sec: "&a"
