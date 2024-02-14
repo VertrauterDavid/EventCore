@@ -54,6 +54,11 @@ public class EventCommand implements CommandExecutor, TabCompleter {
                 return false;
             }
 
+            if (args[0].equalsIgnoreCase("reset")) {
+                EventCore.getInstance().getMapManager().reset();
+                return false;
+            }
+
             if (args[0].equalsIgnoreCase("settings")) {
                 Inventory inventory = Bukkit.createInventory(null, 9 * 3, MessageUtil.translateColorCodes("&cEvent Settings"));
                 inventory.setItem(2 + 9, new ItemUtil(Material.WOODEN_AXE).setName("§aSet drop location").setLore("§8 - §7Left click: §aLocation 1", "§8 - §7Right click: §aLocation 2").toItemStack());
@@ -132,6 +137,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event start");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event stop <winner>");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event drop");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event reset");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event autoBorder <on / off>");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event settings");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event kickspec");
@@ -159,7 +165,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            list.addAll(Arrays.asList("start", "stop", "drop", "autoBorder", "settings", "kickspec", "kickall", "clearall"));
+            list.addAll(Arrays.asList("start", "stop", "drop", "reset", "autoBorder", "settings", "kickspec", "kickall", "clearall"));
         }
 
         try {

@@ -17,6 +17,7 @@ Minecraft Event Server System with tons of useful commands and features
 | `/kit *`                       | Give all players the saved kit                          |
 | `/revive <player>`             | Revive a player                                         |
 | `/revive *`                    | Revive all players who are not in gamemode 0            |
+| `/announce <message>`          | Clear all player inventories                            |
 
 
 ### Permissions

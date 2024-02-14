@@ -8,6 +8,7 @@ website: https://vertrauterdavid.net/ & https://github.com/vertrauterdavid/
 softdepend: [PlaceholderAPI]
 
 commands:
+  announcement:
   event:
   kit:
   revive:

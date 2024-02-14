@@ -1,6 +1,9 @@
 package net.vertrauterdavid;
 
 import lombok.Getter;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.vertrauterdavid.command.AnnoucementCommand;
 import net.vertrauterdavid.command.EventCommand;
 import net.vertrauterdavid.command.KitCommand;
 import net.vertrauterdavid.command.ReviveCommand;
@@ -13,7 +16,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.checkerframework.checker.units.qual.A;
 
 @Getter
 public class EventCore extends JavaPlugin {
@@ -35,6 +40,7 @@ public class EventCore extends JavaPlugin {
         gameManager = new GameManager();
         kitManager = new KitManager();
 
+        new AnnoucementCommand("announcement");
         new EventCommand("event");
         new KitCommand("kit");
         new ReviveCommand("revive");
@@ -70,6 +76,14 @@ public class EventCore extends JavaPlugin {
             world.getWorldBorder().setDamageBuffer(BorderUtil.borderDamageBuffer);
             world.getWorldBorder().setDamageAmount(BorderUtil.borderDamageAmount);
         }, 2);
+
+        if (getConfig().getBoolean("Messages.Actionbar.Enabled")) {
+            Scheduler.timerAsync(() -> {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(MessageUtil.get("Messages.Actionbar.Message")));
+                }
+            }, 0, 20);
+        }
     }
 
 }

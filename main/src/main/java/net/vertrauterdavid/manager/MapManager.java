@@ -56,4 +56,10 @@ public class MapManager {
         }
     }
 
+    public void reset() {
+        for (String command : (List<String>) EventCore.getInstance().getConfig().getList("Settings.MapReset.Commands", new ArrayList<>())) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1));
+        }
+    }
+
 }

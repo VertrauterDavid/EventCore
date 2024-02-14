@@ -30,18 +30,18 @@ public class GameManager {
                     String color = MessageUtil.get("Messages.StartTimer.Colors." + timer + "sec");
 
                     player.sendMessage(MessageUtil.getPrefix() + MessageUtil.get("Messages.StartTimer.Message").replaceAll("%timer%", color + timer + "§7"));
-                    player.sendTitle(MessageUtil.get("Messages.StartTimer.Title").replaceAll("%timer%", color + timer + "§7"), " ");
+                    player.sendTitle(MessageUtil.get("Messages.StartTimer.Title").replaceAll("%timer%", color + timer + "§7"), MessageUtil.get("Messages.StartTimer.SubTitle").replaceAll("%timer%", color + timer + "§7"));
                     player.playSound(player.getLocation(), Sound.ENTITY_CHICKEN_EGG, 5, 5);
                 } else if (timer == 0) {
                     player.sendMessage(MessageUtil.getPrefix() + MessageUtil.get("Messages.Start.Message"));
-                    player.sendTitle(MessageUtil.get("Messages.Start.Title"), " ");
+                    player.sendTitle(MessageUtil.get("Messages.Start.Title"), MessageUtil.get("Messages.Start.SubTitle"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
 
                     for (World world : Bukkit.getWorlds()) {
                         world.setDifficulty(Difficulty.HARD);
                     }
 
-                    if (EventCore.getInstance().getConfig().getBoolean("Settings.IngameTimer.Enabled")) {
+                    if (EventCore.getInstance().getConfig().getBoolean("Settings.IngameTimer.Enabled") && !(EventCore.getInstance().getConfig().getBoolean("Messages.Actionbar.Enabled"))) {
                         startInGameTimer();
                     }
 
@@ -90,6 +90,10 @@ public class GameManager {
             world.setDifficulty(Difficulty.PEACEFUL);
             world.getWorldBorder().setSize(200);
         }
+
+        if (EventCore.getInstance().getConfig().getBoolean("Settings.MapReset.AutoReset")) {
+            EventCore.getInstance().getMapManager().reset();
+        }
     }
 
     private BukkitTask timerTask;
@@ -111,14 +115,16 @@ public class GameManager {
             message = message.replaceAll("ss", String.format("%02d", (inGameTimer % 60)));
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }, 0, 20);
     }
 
     public void stopInGameTimer() {
         inGameTimer = 0;
-        timerTask.cancel();
+        if (timerTask != null) {
+            timerTask.cancel();
+        }
     }
 
 }

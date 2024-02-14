@@ -36,6 +36,10 @@ Settings:
       - "//pos1 %pos1%"
       - "//pos2 %pos2%"
       - "//set 0"
+  MapReset:
+    AutoReset: true # Automatically reset the map after /event stop
+    Commands: # Commands that are executed by the console for map reset
+      - "/arena reset ARENA extreme" # Example for https://github.com/StrangeOne101/PlatinumArenas
   AutoStop1Player: true # Automatically stop the event if only one player is alive
   AllowItemDropBeforeStart: true # Allow item drop and pickup before the event starts
   DropOnPlayerCount:
@@ -60,7 +64,8 @@ Messages:
   StartTimer:
     Timer: 5 # Timer in seconds
     Message: "The game starts in &c%timer% seconds!"
-    Title: "%timer%"
+    Title: "%timer%" # 1st row
+    SubTitle: "" # 2nd row
     Colors:
       1sec: "&a"
       2sec: "&e"
@@ -69,12 +74,22 @@ Messages:
       5sec: "&4"
   Start:
     Message: "&aThe game starts now! Good luck!"
-    Title: "&aStart!"
+    Title: "&aStart!" # 1st row
+    SubTitle: "" # 2nd row
   Stop:
     Enabled: true
     Message: "&cThe game has ended! The winner is %winner%"
     Title: "&c%winner%" # 1st row
     SubTitle: "&7is the winner" # 2nd row
+  Actionbar:
+    Enabled: true # Overrides the 'IngameTimer' setting
+    Message: "&#559effYou are playing the best Event!" # Message that is displayed in the actionbar
+  AnnoucementCommand: # %prefix% = Prefix, %message% = Message
+    MessageFormat: "%prefix% %message%"
+    Title:
+      Enabled: true
+      Title: "&#559eff&lANNOUNCEMENT" # 1st row
+      SubTitle: "&7%message%" # 2nd row
 
 AutoBroadcast: # Messages that are automatically broadcasted
   Enabled: true
