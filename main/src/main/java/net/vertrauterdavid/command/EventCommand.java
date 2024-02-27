@@ -103,7 +103,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
                 if (args[1].equalsIgnoreCase("on")) {
                     BorderUtil.autoBorder = true;
 
-                    player.sendMessage(MessageUtil.getPrefix() + "AutoBorder has been §cdeactivated!");
+                    player.sendMessage(MessageUtil.getPrefix() + "AutoBorder has been §aactivated!");
                     return false;
                 }
 
@@ -111,7 +111,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
                     BorderUtil.autoBorder = false;
                     BorderUtil.lastOptimal = BorderUtil.borderDefault;
 
-                    player.sendMessage(MessageUtil.getPrefix() + "AutoBorder has been §aactivated!");
+                    player.sendMessage(MessageUtil.getPrefix() + "AutoBorder has been §cdeactivated!");
                     return false;
                 }
             }
