@@ -1,6 +1,7 @@
 # EventCore
 Minecraft Event Server System with tons of useful commands and features
 
+[![download](https://img.shields.io/github/downloads/VertrauterDavid/EventCore/total?style=for-the-badge)](https://github.com/VertrauterDavid/EventCore/releases/latest)
 
 ### Commands
 | Command                        | Action                                                  |
