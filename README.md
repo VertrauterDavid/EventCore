@@ -1,6 +1,6 @@
 # EventCore
 
-[![download](https://img.shields.io/github/downloads/VertrauterDavid/EventCore/total?style=for-the-badge)](https://github.com/VertrauterDavid/Homes/releases/latest)
+[![download](https://img.shields.io/github/downloads/VertrauterDavid/EventCore/total?style=for-the-badge)](https://github.com/VertrauterDavid/EventCore/releases/latest)
 ![license](https://img.shields.io/github/license/VertrauterDavid/EventCore?style=for-the-badge)
 ![stars](https://img.shields.io/github/stars/VertrauterDavid/EventCore?style=for-the-badge)
 ![forks](https://img.shields.io/github/forks/VertrauterDavid/EventCore?style=for-the-badge)
