@@ -8,7 +8,7 @@
 <hr>
 
 ### Installation
-1. Download jar from [here](https://github.com/VertrauterDavid/Homes/releases/latest)
+1. Download jar from [here](https://github.com/VertrauterDavid/EventCore/releases/latest)
 2. Put the jar in your plugins folder
 3. Restart your server (not reload)
 
