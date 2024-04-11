@@ -1,9 +1,22 @@
 # EventCore
-Minecraft Event Server System with tons of useful commands and features
 
-[![download](https://img.shields.io/github/downloads/VertrauterDavid/EventCore/total?style=for-the-badge)](https://github.com/VertrauterDavid/EventCore/releases/latest)
+[![download](https://img.shields.io/github/downloads/VertrauterDavid/EventCore/total?style=for-the-badge)](https://github.com/VertrauterDavid/Homes/releases/latest)
+![license](https://img.shields.io/github/license/VertrauterDavid/EventCore?style=for-the-badge)
+![stars](https://img.shields.io/github/stars/VertrauterDavid/EventCore?style=for-the-badge)
+![forks](https://img.shields.io/github/forks/VertrauterDavid/EventCore?style=for-the-badge)
 
-### Commands
+<hr>
+
+### Installation
+1. Download jar from [here](https://github.com/VertrauterDavid/Homes/releases/latest)
+2. Put the jar in your plugins folder
+3. Restart your server (not reload)
+
+<hr>
+
+<details>
+    <summary><h3 style="display: inline;">Commands</h3></summary>
+
 | Command                        | Action                                                  |
 |--------------------------------|:--------------------------------------------------------|
 | `/event start`                 | Start the event                                         |
@@ -20,15 +33,25 @@ Minecraft Event Server System with tons of useful commands and features
 | `/revive *`                    | Revive all players who are not in gamemode 0            |
 | `/announce <message>`          | Announce a message                                      |
 
+</details>
 
-### Permissions
+<hr>
+
+<details>
+    <summary><h3 style="display: inline;">Permissions</h3></summary>
+
 | Permissions     |                                                                                        |
 |-----------------|:---------------------------------------------------------------------------------------|
 | `event.bypass`  | Disables protect while not started (break blocks, place blocks, interact, hit players) |
 | `event.command` | Use /event                                                                             |
 
+</details>
 
-### Placeholders
+<hr>
+
+<details>
+    <summary><h3 style="display: inline;">Placeholders</h3></summary>
+
 | Placeholder          | Description                                       | Example |
 |:---------------------|:--------------------------------------------------|:--------|
 | `%eventcore_total%`  | Total players online                              | 12      |
@@ -40,3 +63,5 @@ Minecraft Event Server System with tons of useful commands and features
 | `%eventcore_border%` | Current border size of the world the player is on | 30      |
 | `%eventcore_ping%`   | Ping of the player                                | 18ms    |
 | `%eventcore_tps%`    | Server TPS (via [Spark](https://spark.lucko.me/)) | 20.00   |
+
+</details>
