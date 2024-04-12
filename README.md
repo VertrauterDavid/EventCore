@@ -14,6 +14,17 @@
 
 <hr>
 
+### Future updates
+- Possibility to save multiple kits
+- Possibility to create teams (for tournaments or similar)
+- Possibility to host events directly on a survival server but still get a event kit
+- More ingame config options
+- Integrated fast world reset system
+- Integrated scoreboard system to minimize plugins on the server
+- Placeholder Support in Messages
+
+<hr>
+
 <details>
     <summary><h3 style="display: inline;">Commands</h3></summary>
 
