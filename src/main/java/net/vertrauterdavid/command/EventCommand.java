@@ -31,7 +31,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
 
         if (args.length == 0) {
             player.sendMessage(" ");
-            player.sendMessage(MessageUtil.getPrefix() + "§7Running §aEventCore §7v" + EventCore.getInstance().getVersionUtil().getCurrentVersion());
+            player.sendMessage(MessageUtil.getPrefix() + "§7Running §aEventCore §7v" + EventCore.getInstance().getVersionUtil().getCurrentVersion(EventCore.getInstance()));
             player.sendMessage(MessageUtil.getPrefix() + "§7Download at §ahttps://github.com/VertrauterDavid");
             player.sendMessage(" ");
         }

@@ -1,7 +1,6 @@
 package net.vertrauterdavid.util.plugin;
 
-import net.vertrauterdavid.EventCore;
-import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -13,41 +12,24 @@ public class VersionUtil {
     private double newestVersion = -1;
     private double currentVersion = -1;
 
-    public VersionUtil() {
-        newestVersion = getNewestVersion();
-        currentVersion = getCurrentVersion();
+    public VersionUtil(JavaPlugin javaPlugin, String product) {
+        newestVersion = getNewestVersion(product);
+        currentVersion = getCurrentVersion(javaPlugin);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(EventCore.getInstance(), () -> {
-            if (newestVersion == -1 || currentVersion == -1) {
-                EventCore.getInstance().getLogger().log(Level.WARNING, " ");
-                EventCore.getInstance().getLogger().log(Level.WARNING, "§cVersion check failed! If you want to report this error you can do so under:");
-                EventCore.getInstance().getLogger().log(Level.WARNING, "§chttps://github.com/VertrauterDavid");
-                EventCore.getInstance().getLogger().log(Level.WARNING, " ");
-                return;
-            }
+        if (newestVersion == -1 || currentVersion == -1) {
+            javaPlugin.getLogger().log(Level.WARNING, "§cVersion check failed! If you want to report this error you can do so under:\n§chttps://github.com/VertrauterDavid");
+            return;
+        }
 
-            if (newestVersion > currentVersion) {
-                EventCore.getInstance().getLogger().log(Level.WARNING, " ");
-                EventCore.getInstance().getLogger().log(Level.WARNING, "§aEventCore started!");
-                EventCore.getInstance().getLogger().log(Level.WARNING, " ");
-                EventCore.getInstance().getLogger().log(Level.WARNING, "§fCurrent version: §c" + currentVersion + " §f| Latest version: §c" + newestVersion);
-                EventCore.getInstance().getLogger().log(Level.WARNING, " ");
-                EventCore.getInstance().getLogger().log(Level.WARNING, "§cYou can download the latest version here:");
-                EventCore.getInstance().getLogger().log(Level.WARNING, "§chttps://github.com/VertrauterDavid");
-                EventCore.getInstance().getLogger().log(Level.WARNING, " ");
-                return;
-            }
+        if (newestVersion > currentVersion) {
+            javaPlugin.getLogger().log(Level.WARNING, "\n\n§a" + product + " started!\n\n§fCurrent version: §c%s §f| Latest version: §c%s\n\n§cYou can download the latest version here:\n§chttps://github.com/VertrauterDavid\n\n".formatted(currentVersion, newestVersion));
+            return;
+        }
 
-            EventCore.getInstance().getLogger().log(Level.INFO, " ");
-            EventCore.getInstance().getLogger().log(Level.INFO, "§aEventCore successfully started!");
-            EventCore.getInstance().getLogger().log(Level.INFO, " ");
-            EventCore.getInstance().getLogger().log(Level.INFO, "§fCurrent version: §a" + currentVersion + " §f| Latest version: §a" + newestVersion);
-            EventCore.getInstance().getLogger().log(Level.INFO, "§aYou are up to date!");
-            EventCore.getInstance().getLogger().log(Level.INFO, " ");
-        }, 20L);
+        javaPlugin.getLogger().log(Level.INFO, "\n\n§a" + product + " successfully started!\n\n§fCurrent version: §a%s §f| Latest version: §a%s\n§aYou are up to date:\n\n".formatted(currentVersion, newestVersion));
     }
 
-    public double getNewestVersion() {
+    public double getNewestVersion(String product) {
         if (this.newestVersion != -1) {
             return this.newestVersion;
         }
@@ -56,7 +38,7 @@ public class VersionUtil {
             HttpURLConnection httpURLConnection = (HttpURLConnection) new URL("https://api.vertrauterdavid.net/plugins/checkVersionFree.php").openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
-            byte[] input = ("product=EventCore").getBytes(StandardCharsets.UTF_8);
+            byte[] input = ("product=" + product).getBytes(StandardCharsets.UTF_8);
             httpURLConnection.getOutputStream().write(input, 0, input.length);
             httpURLConnection.getResponseCode();
             newestVersion = Double.parseDouble(new String(httpURLConnection.getInputStream().readAllBytes(), StandardCharsets.UTF_8));
@@ -66,18 +48,16 @@ public class VersionUtil {
         return 0;
     }
 
-    public double getCurrentVersion() {
+    public double getCurrentVersion(JavaPlugin javaPlugin) {
         if (this.currentVersion != -1) {
             return this.currentVersion;
         }
 
-        double currentVersion = 0;
-
         try {
-            currentVersion = Double.parseDouble(EventCore.getInstance().getDescription().getVersion());
+            this.currentVersion = Double.parseDouble(javaPlugin.getDescription().getVersion());
         } catch (NumberFormatException ignored) { }
 
-        return currentVersion;
+        return this.currentVersion;
     }
 
 }
