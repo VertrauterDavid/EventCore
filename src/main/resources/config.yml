@@ -28,14 +28,6 @@ Settings:
     Damage:
       Buffer: 0.0 # It is recommended to use '0' if the boost is activated
       Amount: 0.2 # Damage per block
-  Drop:
-    Pos1: '-100,0,-100' # Change the setting only with '/event settings'
-    Pos2: '100,100,100' # Change the setting only with '/event settings'
-    Commands: # Commands that are executed by the console for drop - it is recommended to use FastAsyncWorldEdit
-      - "//world world"
-      - "//pos1 %pos1%"
-      - "//pos2 %pos2%"
-      - "//set 0"
   MapReset:
     AutoReset: true # Automatically reset the map after /event stop
     Commands: # Commands that are executed by the console for map reset
@@ -45,6 +37,10 @@ Settings:
   DropOnPlayerCount:
     Enabled: true
     Count: 15
+  Drop:
+    BorderExtra: 3 # Blocks that are dropped in addition to the border size
+    CustomCommands: # Commands which are additionally executed after the drop
+      - "/kill @e[type=!player]"
   IngameTimer:
     Enabled: true
     Format: "&8» &chh:mm:ss &8«" # Format of the timer - hh = hours, mm = minutes, ss = seconds

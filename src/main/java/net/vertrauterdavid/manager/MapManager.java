@@ -8,22 +8,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 public class MapManager {
 
     private Location spawnLocation;
-    private String dropPos1;
-    private String dropPos2;
 
     public MapManager() {
-        Scheduler.wait(() -> {
-            spawnLocation = LocationUtil.fromString(EventCore.getInstance().getConfig().getString("Settings.SpawnLocation", "world/0/200/0"));
-            dropPos1 = EventCore.getInstance().getConfig().getString("Settings.Drop.Pos1", "0/0/0");
-            dropPos2 = EventCore.getInstance().getConfig().getString("Settings.Drop.Pos2", "0/0/0");
-        }, 2);
+        Scheduler.wait(() -> spawnLocation = LocationUtil.fromString(EventCore.getInstance().getConfig().getString("Settings.SpawnLocation", "world/0/200/0")), 2);
     }
 
     public void saveSpawnLocation(Player player) {
@@ -35,15 +26,19 @@ public class MapManager {
     }
 
     public void drop() {
-        for (String command : (List<String>) EventCore.getInstance().getConfig().getList("Settings.Drop.Commands", new ArrayList<>())) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1).replaceAll("%pos1%", dropPos1).replaceAll("%pos2%", dropPos2));
-        }
+        long borderExtra = EventCore.getInstance().getConfig().getLong("Settings.Drop.BorderExtra", 3);
+        Location edgeMin = spawnLocation.clone().subtract(spawnLocation.getWorld().getWorldBorder().getSize() / 2D + borderExtra, 0, spawnLocation.getWorld().getWorldBorder().getSize() / 2D + borderExtra);
+        Location edgeMax = spawnLocation.clone().add(spawnLocation.getWorld().getWorldBorder().getSize() / 2D + borderExtra, 0, spawnLocation.getWorld().getWorldBorder().getSize() / 2D + borderExtra);
+
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/world " + spawnLocation.getWorld().getName());
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/pos1 " + edgeMin.getBlockX() + ",-63," + edgeMin.getBlockZ());
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/pos2 " + edgeMax.getBlockX() + ",350," + edgeMax.getBlockZ());
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "/set 0");
+        EventCore.getInstance().getConfig().getStringList("Settings.Drop.CustomCommands").forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1)));
     }
 
     public void reset() {
-        for (String command : (List<String>) EventCore.getInstance().getConfig().getList("Settings.MapReset.Commands", new ArrayList<>())) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1));
-        }
+        EventCore.getInstance().getConfig().getStringList("Settings.MapReset.Commands").forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1)));
     }
 
 }
