@@ -88,7 +88,7 @@ public class GameManager {
 
         for (World world : Bukkit.getWorlds()) {
             world.setDifficulty(Difficulty.PEACEFUL);
-            world.getWorldBorder().setSize(200);
+            world.getWorldBorder().setSize(BorderUtil.borderDefault);
         }
 
         if (EventCore.getInstance().getConfig().getBoolean("Settings.MapReset.AutoReset")) {
