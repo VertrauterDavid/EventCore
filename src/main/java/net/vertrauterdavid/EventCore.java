@@ -3,10 +3,7 @@ package net.vertrauterdavid;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.vertrauterdavid.command.AnnoucementCommand;
-import net.vertrauterdavid.command.EventCommand;
-import net.vertrauterdavid.command.KitCommand;
-import net.vertrauterdavid.command.ReviveCommand;
+import net.vertrauterdavid.command.*;
 import net.vertrauterdavid.listener.*;
 import net.vertrauterdavid.manager.GameManager;
 import net.vertrauterdavid.manager.KitManager;
@@ -46,6 +43,7 @@ public class EventCore extends JavaPlugin {
         new EventCommand("event");
         new KitCommand("kit");
         new ReviveCommand("revive");
+        new SpawnCommand("spawn");
 
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), instance);
         Bukkit.getPluginManager().registerEvents(new BlockExplodeListener(), instance);
