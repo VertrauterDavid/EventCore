@@ -27,22 +27,6 @@ public class InventoryClickListener implements Listener {
         if (view.getTitle().equalsIgnoreCase("§cEvent Settings")) {
             event.setCancelled(true);
 
-            if (itemStack.getType() == Material.WOODEN_AXE) {
-                if (event.isLeftClick()) {
-                    EventCore.getInstance().getMapManager().saveDropPos1(player);
-
-                    player.sendMessage(MessageUtil.getPrefix() + "§aLocation saved!");
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
-                    player.closeInventory();
-                } else if (event.isRightClick()) {
-                    EventCore.getInstance().getMapManager().saveDropPos2(player);
-
-                    player.sendMessage(MessageUtil.getPrefix() + "§aLocation saved!");
-                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
-                    player.closeInventory();
-                }
-            }
-
             if (itemStack.getType() == Material.COMPASS) {
                 EventCore.getInstance().getMapManager().saveSpawnLocation(player);
 

@@ -34,22 +34,6 @@ public class MapManager {
         EventCore.getInstance().saveConfig();
     }
 
-    public void saveDropPos1(Player player) {
-        String location = player.getLocation().getBlockX() + "," + player.getLocation().getBlockY() + "," + player.getLocation().getBlockZ();
-        dropPos1 = location;
-
-        EventCore.getInstance().getConfig().set("Settings.Drop.Pos1", location);
-        EventCore.getInstance().saveConfig();
-    }
-
-    public void saveDropPos2(Player player) {
-        String location = player.getLocation().getBlockX() + "," + player.getLocation().getBlockY() + "," + player.getLocation().getBlockZ();
-        dropPos2 = location;
-
-        EventCore.getInstance().getConfig().set("Settings.Drop.Pos2", location);
-        EventCore.getInstance().saveConfig();
-    }
-
     public void drop() {
         for (String command : (List<String>) EventCore.getInstance().getConfig().getList("Settings.Drop.Commands", new ArrayList<>())) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1).replaceAll("%pos1%", dropPos1).replaceAll("%pos2%", dropPos2));

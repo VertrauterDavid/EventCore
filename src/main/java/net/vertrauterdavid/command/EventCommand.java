@@ -61,9 +61,8 @@ public class EventCommand implements CommandExecutor, TabCompleter {
 
             if (args[0].equalsIgnoreCase("settings")) {
                 Inventory inventory = Bukkit.createInventory(null, 9 * 3, MessageUtil.translateColorCodes("&cEvent Settings"));
-                inventory.setItem(2 + 9, new ItemUtil(Material.WOODEN_AXE).setName("§aSet drop location").setLore("§8 - §7Left click: §aLocation 1", "§8 - §7Right click: §aLocation 2").toItemStack());
-                inventory.setItem(4 + 9, new ItemUtil(Material.COMPASS).setName("§aSet spawn location").toItemStack());
-                inventory.setItem(6 + 9, new ItemUtil(Material.DIAMOND_CHESTPLATE).setName("§aSave Kit").toItemStack());
+                inventory.setItem(3 + 9, new ItemUtil(Material.COMPASS).setName("§aSet spawn location").toItemStack());
+                inventory.setItem(5 + 9, new ItemUtil(Material.DIAMOND_CHESTPLATE).setName("§aSave Kit").toItemStack());
                 player.openInventory(inventory);
                 return false;
             }
