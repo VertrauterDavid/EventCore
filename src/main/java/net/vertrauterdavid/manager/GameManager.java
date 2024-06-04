@@ -45,6 +45,8 @@ public class GameManager {
                         startInGameTimer();
                     }
 
+                    EventCore.getInstance().getConfig().getStringList("Settings.Start.CustomCommands").forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1)));
+
                     running = true;
                     task.cancel();
                 }
@@ -90,6 +92,8 @@ public class GameManager {
             world.setDifficulty(Difficulty.PEACEFUL);
             world.getWorldBorder().setSize(BorderUtil.borderDefault);
         }
+
+        EventCore.getInstance().getConfig().getStringList("Settings.Stop.CustomCommands").forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.substring(1)));
 
         if (EventCore.getInstance().getConfig().getBoolean("Settings.MapReset.AutoReset")) {
             EventCore.getInstance().getMapManager().reset();

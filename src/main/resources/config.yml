@@ -44,6 +44,12 @@ Settings:
   IngameTimer:
     Enabled: true
     Format: "&8» &chh:mm:ss &8«" # Format of the timer - hh = hours, mm = minutes, ss = seconds
+  Start:
+    CustomCommands: # Commands which are executed on start
+      - "/kill @e[type=!player]"
+  Stop:
+    CustomCommands: # Commands which are executed after the stop
+      - "/whitelist on"
 
 Messages:
   Prefix: "&8 | &#559effEvent &8» &7"
