@@ -43,6 +43,7 @@
 | `/revive <player>`             | Revive a player                                         |
 | `/revive *`                    | Revive all players who are not in gamemode 0            |
 | `/announce <message>`          | Announce a message                                      |
+| `/spawn`                       | Teleport to the spawn                                   |
 
 </details>
 
@@ -51,10 +52,11 @@
 <details>
     <summary><h3 style="display: inline;">Permissions</h3></summary>
 
-| Permissions     |                                                                                        |
-|-----------------|:---------------------------------------------------------------------------------------|
-| `event.bypass`  | Disables protect while not started (break blocks, place blocks, interact, hit players) |
-| `event.command` | Use /event                                                                             |
+| Permissions           |                                                                                        |
+|-----------------------|:---------------------------------------------------------------------------------------|
+| `event.bypass`        | Disables protect while not started (break blocks, place blocks, interact, hit players) |
+| `event.command`       | Use /event                                                                             |
+| `event.spawn`         | Use /spawn                                                                             |
 
 </details>
 
