@@ -4,7 +4,6 @@ import net.vertrauterdavid.EventCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AutoBroadcast implements Runnable {
@@ -13,12 +12,12 @@ public class AutoBroadcast implements Runnable {
     private int index = 0;
 
     public AutoBroadcast() {
-        messages = (List<String>) EventCore.getInstance().getConfig().getList("AutoBroadcast.Messages", new ArrayList<>());
+        messages = EventCore.getInstance().getConfig().getStringList("AutoBroadcast.Messages");
     }
 
     @Override
     public void run() {
-        if (messages.isEmpty()) {
+        if (!(EventCore.getInstance().getConfig().getBoolean("AutoBroadcast.Enabled")) || messages.isEmpty()) {
             return;
         }
 
