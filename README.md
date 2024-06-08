@@ -34,7 +34,7 @@
 | `/event stop <winner>`         | Stop the event                                          |
 | `/event drop`                  | Drop with the commands defined in the config.yml        |
 | `/event autoBorder <on / off>` | Toggle AutoBorder                                       |
-| `/event settings`              | Settings GUI                                            |
+| `/event setSpawn`              | Set the spawn location                                  |
 | `/event kickspec`              | Kick all spectators                                     |
 | `/event kickall`               | Kick all players (exclude players with `event.command`) |
 | `/event clearall`              | Clear all player inventories                            |

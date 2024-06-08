@@ -2,14 +2,12 @@ package net.vertrauterdavid.command;
 
 import net.vertrauterdavid.EventCore;
 import net.vertrauterdavid.util.BorderUtil;
-import net.vertrauterdavid.util.ItemUtil;
 import net.vertrauterdavid.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,11 +57,11 @@ public class EventCommand implements CommandExecutor, TabCompleter {
                 return false;
             }
 
-            if (args[0].equalsIgnoreCase("settings")) {
-                Inventory inventory = Bukkit.createInventory(null, 9 * 3, MessageUtil.translateColorCodes("&cEvent Settings"));
-                inventory.setItem(3 + 9, new ItemUtil(Material.COMPASS).setName("§aSet spawn location").toItemStack());
-                inventory.setItem(5 + 9, new ItemUtil(Material.DIAMOND_CHESTPLATE).setName("§aSave Kit").toItemStack());
-                player.openInventory(inventory);
+            if (args[0].equalsIgnoreCase("setSpawn")) {
+                EventCore.getInstance().getMapManager().saveSpawnLocation(player);
+                player.sendMessage(MessageUtil.getPrefix() + "§aLocation saved!");
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
+                player.closeInventory();
                 return false;
             }
 
@@ -138,7 +136,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event drop");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event reset");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event autoBorder <on / off>");
-        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event settings");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event setSpawn");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event kickspec");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event kickall");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event clearall");
