@@ -17,6 +17,11 @@ public class BlockPlaceListener implements Listener {
             return;
         }
 
+        if (event.getBlock().getLocation().getBlockY() > EventCore.getInstance().getConfig().getLong("Settings.MaxBuildHeight", 0L)) {
+            event.setCancelled(true);
+            return;
+        }
+
         event.setCancelled(!(EventCore.getInstance().getGameManager().isRunning()));
     }
 
