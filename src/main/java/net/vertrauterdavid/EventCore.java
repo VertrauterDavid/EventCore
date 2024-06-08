@@ -34,7 +34,7 @@ public class EventCore extends JavaPlugin {
 
         instance = this;
         new StatisticUtil(this);
-        versionUtil = new VersionUtil(this, "EventCore");
+        versionUtil = new VersionUtil(this);
         mapManager = new MapManager();
         gameManager = new GameManager();
         kitManager = new KitManager();

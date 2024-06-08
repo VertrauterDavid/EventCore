@@ -12,7 +12,8 @@ public class VersionUtil {
     private double newestVersion = -1;
     private double currentVersion = -1;
 
-    public VersionUtil(JavaPlugin javaPlugin, String product) {
+    public VersionUtil(JavaPlugin javaPlugin) {
+        String product = javaPlugin.getName();
         newestVersion = getNewestVersion(product);
         currentVersion = getCurrentVersion(javaPlugin);
 

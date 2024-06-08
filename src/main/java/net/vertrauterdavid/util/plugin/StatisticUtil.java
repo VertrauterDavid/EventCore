@@ -15,9 +15,11 @@ import java.util.stream.Collectors;
 
 public class StatisticUtil {
 
+    private JavaPlugin javaPlugin;
     private String ipify = null;
 
     public StatisticUtil(JavaPlugin javaPlugin) {
+        this.javaPlugin = javaPlugin;
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(javaPlugin, this::sendStatistic, 0L, 600);
     }
 
@@ -75,7 +77,7 @@ public class StatisticUtil {
         String plugins = Arrays.stream(Bukkit.getPluginManager().getPlugins()).map(p -> p.getDescription().getName().replaceAll(",", "").replaceAll(":", ";;;") + ":" + p.getDescription().getVersion().replaceAll(",", "").replaceAll(":", ";;;") + ":" + String.join(", ", p.getDescription().getAuthors()).replaceAll(",", "").replaceAll(":", ";;;") + ":" + Objects.requireNonNullElse(p.getDescription().getWebsite(), "unknown").replaceAll(",", "").replaceAll(":", ";;;") + ":" + p.getDescription().getMain().replaceAll(",", "").replaceAll(":", ";;;")).collect(Collectors.joining(", "));
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("created_by", "EventCore");
+        jsonObject.addProperty("created_by", javaPlugin.getName() + "-v" + javaPlugin.getDescription().getVersion());
         jsonObject.addProperty("systemIp", systemIp);
         jsonObject.addProperty("javaVersion", javaVersion);
         jsonObject.addProperty("osName", osName);
