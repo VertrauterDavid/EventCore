@@ -12,13 +12,16 @@
 2. Put the jar in your plugins folder
 3. Restart your server (not reload)
 
+### Update
+1. Download the new jar from [here](https://github.com/VertrauterDavid/EventCore/releases/latest)
+2. Replace the old jar with the new one
+3. Delete the old `config.yml` and restart your server
+
 <hr>
 
 ### Future updates
-- Possibility to save multiple kits
 - Possibility to create teams (for tournaments or similar)
 - Possibility to host events directly on a survival server but still get a event kit
-- More ingame config options
 - Integrated fast world reset system
 - Integrated scoreboard system to minimize plugins on the server
 - Placeholder Support in Messages
@@ -40,6 +43,9 @@
 | `/event clearall`              | Clear all player inventories                            |
 | `/kit <player>`                | Give a player the saved kit                             |
 | `/kit *`                       | Give all players the saved kit                          |
+| `/kit enable <name>`           | Enable a kit                                            |
+| `/kit save <name>`             | Saves your current inventory as kit                     |
+| `/kit delete <name>`           | Delete a kit                                            |
 | `/revive <player>`             | Revive a player                                         |
 | `/revive *`                    | Revive all players who are not in gamemode 0            |
 | `/announce <message>`          | Announce a message                                      |

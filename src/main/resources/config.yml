@@ -15,7 +15,8 @@
 # ---------------------------------------------------------------------------
 
 Settings:
-  SpawnLocation: 'world/0/200/0' # Change the setting only with '/event settings'
+  SpawnLocation: 'world/0/200/0' # Change the setting only with '/event setSpawn'
+  MaxBuildHeight: 300 # Maximum build height
   DisableFallDamage: true # Disable fall damage
   DisableItemExplosions: true # Disable item explosions for End Crystal
   WorldBorder:
@@ -102,5 +103,7 @@ AutoBroadcast: # Messages that are automatically broadcasted
   UseBroadcastCommand: false # Activate whether the 'BroadcastCommand' command should be used
   BroadcastCommand: "/bc %message%"
 
-Kit: # Change the setting only with '/event settings'
-  Kit: '-'
+Kits: # Change the setting only with '/event kit'
+  EnabledKit: 'default'
+  Kits:
+    default: '-'

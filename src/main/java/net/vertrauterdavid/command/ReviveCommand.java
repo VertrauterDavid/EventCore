@@ -68,7 +68,7 @@ public class ReviveCommand implements CommandExecutor, TabCompleter {
         try {
             Collections.sort(list);
         } catch (Exception ignored) { }
-        return list.stream().filter(content -> content.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).toList();
+        return list.stream().filter(content -> content.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).sorted().toList();
     }
 
 }

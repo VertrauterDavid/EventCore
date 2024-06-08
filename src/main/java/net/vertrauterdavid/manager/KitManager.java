@@ -1,7 +1,9 @@
 package net.vertrauterdavid.manager;
 
+import lombok.Getter;
 import net.vertrauterdavid.EventCore;
 import net.vertrauterdavid.util.MessageUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
@@ -12,9 +14,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
+@Getter
 public class KitManager {
 
-    private HashMap<Integer, ItemStack> loaded;
+    private String enabledKit = "";
+    private final HashMap<String, HashMap<Integer, ItemStack>> kits = new HashMap<>();
 
     public KitManager() {
         load();
@@ -24,30 +28,43 @@ public class KitManager {
         player.getInventory().setArmorContents(null);
         player.getInventory().clear();
 
+        HashMap<Integer, ItemStack> map = kits.getOrDefault(enabledKit, new HashMap<>());
         for (int i = 0; i < 41; i++) {
-            player.getInventory().setItem(i, loaded.get(i));
+            player.getInventory().setItem(i, map.getOrDefault(i, null));
         }
     }
 
     private void load() {
-        HashMap<Integer, ItemStack> map = new HashMap<>();
-        String base64 = EventCore.getInstance().getConfig().getString("Kit.Kit", "-");
+        enabledKit = EventCore.getInstance().getConfig().getString("Kits.EnabledKit", "default");
 
-        if (!(base64.equalsIgnoreCase("-"))) {
-            try {
-                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(Base64Coder.decodeLines(base64));
-                BukkitObjectInputStream bukkitObjectInputStream = new BukkitObjectInputStream(byteArrayInputStream);
+        if (EventCore.getInstance().getConfig().getConfigurationSection("Kits") == null) return;
+        if (EventCore.getInstance().getConfig().getConfigurationSection("Kits.Kits") == null) return;
 
-                for (int i = 0; i < 41; i++) {
-                    map.put(i, (ItemStack) bukkitObjectInputStream.readObject());
-                }
-            } catch (Exception ignored) { }
-        }
+        EventCore.getInstance().getConfig().getConfigurationSection("Kits.Kits").getKeys(false).forEach(kit -> {
+            HashMap<Integer, ItemStack> map = new HashMap<>();
+            String base64 = EventCore.getInstance().getConfig().getString("Kits.Kits." + kit, "-");
+            if (!(base64.equalsIgnoreCase("-"))) {
+                try {
+                    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(Base64Coder.decodeLines(base64));
+                    BukkitObjectInputStream bukkitObjectInputStream = new BukkitObjectInputStream(byteArrayInputStream);
 
-        loaded = map;
+                    for (int i = 0; i < 41; i++) {
+                        map.put(i, (ItemStack) bukkitObjectInputStream.readObject());
+                    }
+                } catch (Exception ignored) { }
+            }
+            kits.put(kit, map);
+        });
     }
 
-    public void save(Player player) {
+    public void enable(String kit) {
+        enabledKit = kit;
+        EventCore.getInstance().getConfig().set("Kits.EnabledKit", kit);
+        EventCore.getInstance().saveConfig();
+        Bukkit.getOnlinePlayers().forEach(this::give);
+    }
+
+    public void save(String kit, Player player) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             BukkitObjectOutputStream bukkitObjectOutputStream = new BukkitObjectOutputStream(byteArrayOutputStream);
@@ -58,7 +75,7 @@ public class KitManager {
 
             bukkitObjectOutputStream.close();
             String base64 = Base64Coder.encodeLines(byteArrayOutputStream.toByteArray());
-            EventCore.getInstance().getConfig().set("Kit.Kit", base64);
+            EventCore.getInstance().getConfig().set("Kits.Kits." + kit, base64);
             EventCore.getInstance().saveConfig();
 
             load();
@@ -67,6 +84,12 @@ public class KitManager {
         } catch (Exception exception) {
             player.sendMessage(MessageUtil.getPrefix() + "§cFailed to save!");
         }
+    }
+
+    public void delete(String kit) {
+        kits.remove(kit);
+        EventCore.getInstance().getConfig().set("Kits.Kits." + kit, null);
+        EventCore.getInstance().saveConfig();
     }
 
 }

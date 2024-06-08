@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class KitCommand implements CommandExecutor, TabCompleter {
@@ -29,10 +28,7 @@ public class KitCommand implements CommandExecutor, TabCompleter {
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("*")) {
-                for (Player target : Bukkit.getOnlinePlayers()) {
-                    EventCore.getInstance().getKitManager().give(target);
-                }
-
+                Bukkit.getOnlinePlayers().forEach(onlinePlayer -> EventCore.getInstance().getKitManager().give(onlinePlayer));
                 player.sendMessage(MessageUtil.getPrefix() + "§aEveryone §7has been equipped!");
                 return false;
             }
@@ -48,7 +44,47 @@ public class KitCommand implements CommandExecutor, TabCompleter {
             return false;
         }
 
+        if (args.length == 2) {
+            String kit = args[1].toLowerCase();
+
+            if (args[0].equalsIgnoreCase("enable")) {
+                if (!EventCore.getInstance().getKitManager().getKits().containsKey(kit)) {
+                    player.sendMessage(MessageUtil.getPrefix() + "§cThis kit does not exist!");
+                    return false;
+                }
+
+                EventCore.getInstance().getKitManager().enable(kit);
+                player.sendMessage(MessageUtil.getPrefix() + "§a" + kit + " §7has been enabled!");
+                return false;
+            }
+
+            if (args[0].equalsIgnoreCase("save")) {
+                EventCore.getInstance().getKitManager().save(kit, player);
+                player.sendMessage(MessageUtil.getPrefix() + "§a" + kit + " §7has been saved!");
+                return false;
+            }
+
+            if (args[0].equalsIgnoreCase("delete")) {
+                if (!EventCore.getInstance().getKitManager().getKits().containsKey(kit)) {
+                    player.sendMessage(MessageUtil.getPrefix() + "§cThis kit does not exist!");
+                    return false;
+                }
+
+                if (EventCore.getInstance().getKitManager().getEnabledKit().equalsIgnoreCase(kit)) {
+                    player.sendMessage(MessageUtil.getPrefix() + "§cYou can't delete the enabled kit!");
+                    return false;
+                }
+
+                EventCore.getInstance().getKitManager().delete(kit);
+                player.sendMessage(MessageUtil.getPrefix() + "§a" + kit + " §7has been deleted!");
+                return false;
+            }
+        }
+
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/kit <player>");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/kit enable <kit>");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/kit save <kit>");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/kit delete <kit>");
         return false;
     }
 
@@ -59,16 +95,19 @@ public class KitCommand implements CommandExecutor, TabCompleter {
 
         List<String> list = new ArrayList<>();
 
+        if (args.length == 2) {
+            list.addAll(EventCore.getInstance().getKitManager().getKits().keySet());
+        }
+
         if (args.length == 1) {
             list.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).toList());
             list.add("*");
+            list.add("enable");
+            list.add("save");
+            list.add("delete");
         }
 
-        try {
-            Collections.sort(list);
-        } catch (Exception ignored) { }
-
-        return list.stream().filter(content -> content.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).toList();
+        return list.stream().filter(content -> content.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).sorted().toList();
     }
 
 }
