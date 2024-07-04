@@ -9,7 +9,9 @@ softdepend: [PlaceholderAPI]
 
 commands:
   announcement:
+  eventcore:
   event:
+  e:
   kit:
   revive:
   spawn:

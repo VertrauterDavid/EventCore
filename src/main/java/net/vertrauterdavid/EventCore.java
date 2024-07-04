@@ -40,7 +40,9 @@ public class EventCore extends JavaPlugin {
         kitManager = new KitManager();
 
         new AnnoucementCommand("announcement");
+        new EventCommand("eventcore");
         new EventCommand("event");
+        new EventCommand("e");
         new KitCommand("kit");
         new ReviveCommand("revive");
         new SpawnCommand("spawn");
