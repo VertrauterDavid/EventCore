@@ -9,8 +9,6 @@ import net.vertrauterdavid.manager.GameManager;
 import net.vertrauterdavid.manager.KitManager;
 import net.vertrauterdavid.manager.MapManager;
 import net.vertrauterdavid.util.*;
-import net.vertrauterdavid.util.plugin.StatisticUtil;
-import net.vertrauterdavid.util.plugin.VersionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
@@ -23,7 +21,6 @@ public class EventCore extends JavaPlugin {
 
     @Getter
     private static EventCore instance;
-    private VersionUtil versionUtil;
     private MapManager mapManager;
     private GameManager gameManager;
     private KitManager kitManager;
@@ -33,8 +30,6 @@ public class EventCore extends JavaPlugin {
         saveDefaultConfig();
 
         instance = this;
-        new StatisticUtil(this);
-        versionUtil = new VersionUtil(this);
         mapManager = new MapManager();
         gameManager = new GameManager();
         kitManager = new KitManager();
