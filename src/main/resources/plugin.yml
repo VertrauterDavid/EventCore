@@ -1,8 +1,8 @@
 name: EventCore
-version: 1.5
-api-version: 1.19
+version: 1.6
+api-version: 1.21
 main: net.vertrauterdavid.EventCore
-author: VertrauterDavid
+author: VertrauterDavid, JavaMio
 website: https://vertrauterdavid.net/ & https://github.com/vertrauterdavid/
 
 softdepend: [PlaceholderAPI]
@@ -14,4 +14,5 @@ commands:
   e:
   kit:
   revive:
+  respawn:
   spawn:

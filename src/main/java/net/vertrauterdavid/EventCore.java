@@ -1,6 +1,7 @@
 package net.vertrauterdavid;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.vertrauterdavid.command.*;
@@ -16,6 +17,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Slf4j
 @Getter
 public class EventCore extends JavaPlugin {
 
@@ -40,6 +42,7 @@ public class EventCore extends JavaPlugin {
         new EventCommand("e");
         new KitCommand("kit");
         new ReviveCommand("revive");
+        new ReviveCommand("respawn");
         new SpawnCommand("spawn");
 
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), instance);
