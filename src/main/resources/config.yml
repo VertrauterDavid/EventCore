@@ -19,7 +19,12 @@ Settings:
   MaxBuildHeight: 300 # Maximum build height
   DisableFallDamage: true # Disable fall damage
   DisableItemExplosions: true # Disable item explosions for End Crystal
+  HostRank:
+    Permission: "event.host" # Permission which is required to receive the host rank upon Join
+    JoinCommand: "lp user %player% parent add host"
+    QuitCommand: "lp user %player% parent remove host"
   WorldBorder:
+    AutoBorder: false # Change the default value of the AutoBorder feature
     DefaultSize: 200 # Default size before and after the event
     DisableEnderPeals: true # Disable EnderPeals outside the world border
     Boost: # Boost players who are outside the border into the border

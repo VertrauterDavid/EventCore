@@ -8,7 +8,7 @@ public class BorderUtil implements Runnable {
     public static double borderDamageBuffer = 0.0;
     public static double borderDamageAmount = 0.2;
     public static int lastOptimal = borderDefault;
-    public static boolean autoBorder = true;
+    public static boolean autoBorder = EventCore.getInstance().getConfig().getBoolean("Settings.WorldBorder.AutoBorder", false);
 
     public BorderUtil() {
         borderDefault = EventCore.getInstance().getConfig().getInt("Settings.WorldBorder.DefaultSize", borderDefault);

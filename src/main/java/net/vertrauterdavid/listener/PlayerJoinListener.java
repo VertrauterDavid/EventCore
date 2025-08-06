@@ -10,11 +10,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.util.Objects;
+
 public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void handle(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
+        if (player.hasPermission(Objects.requireNonNull(EventCore.getInstance().getConfig().getString("Settings.HostRank.Permission"),"event.host"))) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Objects.requireNonNull(EventCore.getInstance().getConfig().getString("Settings.HostRank.JoinCommand").replaceAll("%player%", player.getName()), "event.host"));
+        }
 
         if (EventCore.getInstance().getConfig().getBoolean("Messages.PlayerJoin.Enabled")) {
             event.setJoinMessage(MessageUtil.getPrefix() + MessageUtil.get("Messages.PlayerJoin.Message").replaceAll("%player%", player.getName()));
