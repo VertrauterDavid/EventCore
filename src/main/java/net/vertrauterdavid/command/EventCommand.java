@@ -101,14 +101,14 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("autoBorder")) {
                 if (args[1].equalsIgnoreCase("on")) {
-                    BorderUtil.autoBorder = true;
+                    BorderUtil.setAutoBorder(true);
 
                     player.sendMessage(MessageUtil.getPrefix() + "AutoBorder has been §aactivated!");
                     return false;
                 }
 
                 if (args[1].equalsIgnoreCase("off")) {
-                    BorderUtil.autoBorder = false;
+                    BorderUtil.setAutoBorder(false);
                     BorderUtil.lastOptimal = BorderUtil.borderDefault;
 
                     player.sendMessage(MessageUtil.getPrefix() + "AutoBorder has been §cdeactivated!");

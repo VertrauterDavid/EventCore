@@ -17,6 +17,13 @@ public class BorderUtil implements Runnable {
         lastOptimal = borderDefault;
     }
 
+    public static void setAutoBorder(boolean value) {
+        autoBorder = value;
+        EventCore.getInstance().getConfig().set("Settings.WorldBorder.AutoBorder", value);
+        EventCore.getInstance().saveConfig();
+    }
+
+
     @Override
     public void run() {
         if (EventCore.getInstance().getGameManager().isRunning() && autoBorder) {
