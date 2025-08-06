@@ -6,21 +6,24 @@ import net.vertrauterdavid.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class EventCommand implements CommandExecutor, TabCompleter {
 
     public EventCommand(String name) {
-        EventCore.getInstance().getCommand(name).setExecutor(this);
-        EventCore.getInstance().getCommand(name).setTabCompleter(this);
+        Objects.requireNonNull(EventCore.getInstance().getCommand(name)).setExecutor(this);
+        Objects.requireNonNull(EventCore.getInstance().getCommand(name)).setTabCompleter(this);
     }
 
     @Override
@@ -29,7 +32,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
 
         if (args.length == 0) {
             player.sendMessage(" ");
-            player.sendMessage(MessageUtil.getPrefix() + "§7Running §aEventCore §7v" + EventCore.getInstance().getVersionUtil().getCurrentVersion(EventCore.getInstance()));
+            player.sendMessage(MessageUtil.getPrefix() + "§7Running §aEventCore §7v" + EventCore.getInstance().getDescription().getVersion());
             player.sendMessage(MessageUtil.getPrefix() + "§7Download at §ahttps://github.com/VertrauterDavid");
             player.sendMessage(" ");
         }
