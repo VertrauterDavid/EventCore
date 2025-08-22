@@ -16,7 +16,7 @@ public class EntityDamageByEntityListener implements Listener {
         Entity damager = event.getDamager();
 
         if (EventCore.getInstance().getConfig().getBoolean("Settings.DisableItemExplosions", true)) {
-            if (entity.getType() == EntityType.DROPPED_ITEM && damager.getType() == EntityType.ENDER_CRYSTAL) {
+            if (entity.getType() == EntityType.ITEM && damager.getType() == EntityType.END_CRYSTAL) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
                     event.setCancelled(true);
                     event.setDamage(0);

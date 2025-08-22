@@ -9,10 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class AnnoucementCommand implements CommandExecutor {
 
     public AnnoucementCommand(String name) {
-        EventCore.getInstance().getCommand(name).setExecutor(this);
+        Objects.requireNonNull(EventCore.getInstance().getCommand(name)).setExecutor(this);
     }
 
     @Override

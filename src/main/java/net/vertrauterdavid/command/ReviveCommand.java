@@ -15,12 +15,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ReviveCommand implements CommandExecutor, TabCompleter {
 
     public ReviveCommand(String name) {
-        EventCore.getInstance().getCommand(name).setExecutor(this);
-        EventCore.getInstance().getCommand(name).setTabCompleter(this);
+        Objects.requireNonNull(EventCore.getInstance().getCommand(name)).setExecutor(this);
+        Objects.requireNonNull(EventCore.getInstance().getCommand(name)).setTabCompleter(this);
     }
 
     @Override
