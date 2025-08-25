@@ -62,6 +62,11 @@ tasks {
         "-Dcom.mojang.eula.agree=true"
     )
 
+    val sharedPlugins = runPaper.downloadPluginsSpec {
+        url("https://github.com/ViaVersion/ViaVersion/releases/download/5.3.2/ViaVersion-5.3.2.jar")
+        url("https://github.com/ViaVersion/ViaBackwards/releases/download/5.3.2/ViaBackwards-5.3.2.jar")
+    }
+
     runServer {
         minecraftVersion(version)
         runDirectory = rootDir.resolve("run/paper/$version")
@@ -71,8 +76,22 @@ tasks {
         }
 
         downloadPlugins {
-            url("https://github.com/ViaVersion/ViaVersion/releases/download/5.3.2/ViaVersion-5.3.2.jar")
-            url("https://github.com/ViaVersion/ViaBackwards/releases/download/5.3.2/ViaBackwards-5.3.2.jar")
+            from(sharedPlugins)
+        }
+
+        jvmArgs = jvmArgsExternal
+    }
+
+    runPaper.folia.registerTask {
+        minecraftVersion(version)
+        runDirectory = rootDir.resolve("run/folia/$version")
+
+        javaLauncher = project.javaToolchains.launcherFor {
+            languageVersion = javaVersion
+        }
+
+        downloadPlugins {
+            from(sharedPlugins)
         }
 
         jvmArgs = jvmArgsExternal
