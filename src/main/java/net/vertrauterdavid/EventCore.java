@@ -79,7 +79,7 @@ public class EventCore extends JavaPlugin {
         if (getConfig().getBoolean("Messages.Actionbar.Enabled")) {
             Scheduler.timerAsync(() -> {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(MessageUtil.get("Messages.Actionbar.Message")));
+                    player.sendActionBar(MessageUtil.get("Messages.Actionbar.Message"));
                 }
             }, 0, 20);
         }
