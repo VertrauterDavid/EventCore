@@ -9,8 +9,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class BlockPlaceListener implements Listener {
 
     @EventHandler
-    public void handle(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
+    public void onBlockPlace(BlockPlaceEvent event) {
+        final Player player = event.getPlayer();
 
         if (player.hasPermission("event.bypass")) {
             event.setCancelled(false);

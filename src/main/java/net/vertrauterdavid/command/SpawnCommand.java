@@ -20,7 +20,7 @@ public class SpawnCommand implements CommandExecutor {
         if (!(commandSender instanceof Player player)) return false;
         if (!(player.hasPermission("event.spawn"))) return false;
 
-        player.teleport(EventCore.getInstance().getMapManager().getSpawnLocation());
+        player.teleportAsync(EventCore.getInstance().getMapManager().getSpawnLocation());
         return false;
     }
 

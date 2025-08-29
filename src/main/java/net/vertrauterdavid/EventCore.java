@@ -2,8 +2,6 @@ package net.vertrauterdavid;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.vertrauterdavid.command.*;
 import net.vertrauterdavid.listener.*;
 import net.vertrauterdavid.manager.GameManager;
@@ -79,7 +77,7 @@ public class EventCore extends JavaPlugin {
         if (getConfig().getBoolean("Messages.Actionbar.Enabled")) {
             Scheduler.timerAsync(() -> {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(MessageUtil.get("Messages.Actionbar.Message")));
+                    player.sendActionBar(MessageUtil.get("Messages.Actionbar.Message"));
                 }
             }, 0, 20);
         }

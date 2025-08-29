@@ -11,9 +11,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class EntityDamageByEntityListener implements Listener {
 
     @EventHandler
-    public void handle(EntityDamageByEntityEvent event) {
-        Entity entity = event.getEntity();
-        Entity damager = event.getDamager();
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        final Entity entity = event.getEntity();
+        final Entity damager = event.getDamager();
 
         if (EventCore.getInstance().getConfig().getBoolean("Settings.DisableItemExplosions", true)) {
             if (entity.getType() == EntityType.ITEM && damager.getType() == EntityType.END_CRYSTAL) {

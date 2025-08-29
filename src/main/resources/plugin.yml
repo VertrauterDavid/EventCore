@@ -1,11 +1,13 @@
 name: EventCore
-version: 1.6
+version: 2.0
 api-version: 1.21
 main: net.vertrauterdavid.EventCore
 author: VertrauterDavid, JavaMio
 website: https://vertrauterdavid.net/ & https://github.com/vertrauterdavid/
+folia-supported: true
 
 softdepend: [PlaceholderAPI]
+#depended: [WorldEdit]
 
 commands:
   announcement:

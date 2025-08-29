@@ -1,5 +1,6 @@
 package net.vertrauterdavid.listener;
 
+import net.kyori.adventure.text.Component;
 import net.vertrauterdavid.EventCore;
 import net.vertrauterdavid.util.MessageUtil;
 import net.vertrauterdavid.util.PlayerUtil;
@@ -11,12 +12,14 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerDeathListener implements Listener {
 
+    //todo - refactor death messages to use components
+
     @EventHandler
-    public void handle(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        final Player player = event.getEntity();
 
         if (player.getGameMode() == GameMode.SPECTATOR) {
-            event.setDeathMessage("");
+            event.deathMessage(Component.empty());
             return;
         }
 
@@ -27,7 +30,7 @@ public class PlayerDeathListener implements Listener {
                 event.setDeathMessage(MessageUtil.get("Messages.PlayerDeath.Message2").replaceAll("%player%", player.getName()));
             }
         } else {
-            event.setDeathMessage("");
+            event.deathMessage(Component.empty());
         }
 
         event.setKeepLevel(true);

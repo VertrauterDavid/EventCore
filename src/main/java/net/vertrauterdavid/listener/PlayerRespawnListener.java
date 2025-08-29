@@ -11,8 +11,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 public class PlayerRespawnListener implements Listener {
 
     @EventHandler
-    public void handle(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        final Player player = event.getPlayer();
         event.setRespawnLocation(EventCore.getInstance().getMapManager().getSpawnLocation());
         PlayerUtil.cleanPlayer(player);
         player.setGameMode(GameMode.SPECTATOR);

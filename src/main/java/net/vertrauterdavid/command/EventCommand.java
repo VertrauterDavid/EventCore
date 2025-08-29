@@ -3,6 +3,7 @@ package net.vertrauterdavid.command;
 import net.vertrauterdavid.EventCore;
 import net.vertrauterdavid.util.BorderUtil;
 import net.vertrauterdavid.util.MessageUtil;
+import net.vertrauterdavid.util.Scheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -26,13 +27,17 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         Objects.requireNonNull(EventCore.getInstance().getCommand(name)).setTabCompleter(this);
     }
 
+    private String getSoftware() {
+        return Scheduler.isFOLIA() ? "Folia" : "PaperMC";
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(commandSender instanceof Player player)) return false;
 
         if (args.length == 0) {
             player.sendMessage(" ");
-            player.sendMessage(MessageUtil.getPrefix() + "§7Running §aEventCore §7v" + EventCore.getInstance().getDescription().getVersion());
+            player.sendMessage(MessageUtil.getPrefix() + "§7Running §aEventCore §7v" + EventCore.getInstance().getDescription().getVersion() + " §7on §a" + getSoftware());
             player.sendMessage(MessageUtil.getPrefix() + "§7Download at §ahttps://github.com/VertrauterDavid");
             player.sendMessage(" ");
         }
@@ -165,7 +170,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            list.addAll(Arrays.asList("start", "stop", "drop", "reset", "autoBorder", "settings", "kickspec", "kickall", "clearall"));
+            list.addAll(Arrays.asList("start", "stop", "drop", "reset", "autoBorder", "kickspec", "kickall", "clearall"));
         }
 
         return list.stream().filter(content -> content.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).sorted().toList();

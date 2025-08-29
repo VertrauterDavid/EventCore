@@ -12,13 +12,14 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Getter
 public class KitManager {
 
     private String enabledKit = "";
-    private final HashMap<String, HashMap<Integer, ItemStack>> kits = new HashMap<>();
+    private final Map<String, Map<Integer, ItemStack>> kits = new ConcurrentHashMap<>();
 
     public KitManager() {
         load();
@@ -28,7 +29,7 @@ public class KitManager {
         player.getInventory().setArmorContents(null);
         player.getInventory().clear();
 
-        HashMap<Integer, ItemStack> map = kits.getOrDefault(enabledKit, new HashMap<>());
+        Map<Integer, ItemStack> map = kits.getOrDefault(enabledKit, new ConcurrentHashMap<>());
         for (int i = 0; i < 41; i++) {
             player.getInventory().setItem(i, map.getOrDefault(i, null));
         }
@@ -41,7 +42,7 @@ public class KitManager {
         if (EventCore.getInstance().getConfig().getConfigurationSection("Kits.Kits") == null) return;
 
         EventCore.getInstance().getConfig().getConfigurationSection("Kits.Kits").getKeys(false).forEach(kit -> {
-            HashMap<Integer, ItemStack> map = new HashMap<>();
+            Map<Integer, ItemStack> map = new ConcurrentHashMap<>();
             String base64 = EventCore.getInstance().getConfig().getString("Kits.Kits." + kit, "-");
             if (!(base64.equalsIgnoreCase("-"))) {
                 try {
