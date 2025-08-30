@@ -37,6 +37,7 @@ public class GameManager {
         timer = new AtomicInteger(EventCore.getInstance().getConfig().getInt("Messages.StartTimer.Timer", 5));
 
         startTask = Scheduler.timer(() -> {
+            System.out.println("update timer");
             if (!timerRunning || running) return;
 
             int current = timer.get();
