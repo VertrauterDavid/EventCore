@@ -60,10 +60,11 @@ public class Scheduler {
         public void cancel() {
             if (task != null) {
                 try {
-                    // Use reflection to call cancel() on Folia ScheduledTask
-                    task.getClass().getMethod("cancel").invoke(task);
+                    Class<?> iface = Class.forName("io.papermc.paper.threadedregions.scheduler.ScheduledTask");
+                    iface.getMethod("cancel").invoke(task);
+                    task = null;
                 } catch (Exception e) {
-                    // Fallback - set to null if reflection fails
+                    System.out.println("Failed to cancel Folia task: " + e.getMessage());
                     task = null;
                 }
             }
@@ -73,10 +74,11 @@ public class Scheduler {
         public boolean isCancelled() {
             if (task == null) return true;
             try {
-                // Use reflection to call isCancelled() on Folia ScheduledTask
-                return (Boolean) task.getClass().getMethod("isCancelled").invoke(task);
+                Class<?> iface = Class.forName("io.papermc.paper.threadedregions.scheduler.ScheduledTask");
+                return (Boolean) iface.getMethod("isCancelled").invoke(task);
             } catch (Exception e) {
-                return task == null;
+                System.out.println("Failed to check if Folia task is cancelled: " + e.getMessage());
+                return true;
             }
         }
     }
