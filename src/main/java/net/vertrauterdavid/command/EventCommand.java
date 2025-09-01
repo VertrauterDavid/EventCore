@@ -170,7 +170,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            list.addAll(Arrays.asList("start", "stop", "drop", "reset", "autoBorder", "kickspec", "kickall", "clearall"));
+            list.addAll(Arrays.asList("start", "stop", "drop", "reset", "autoBorder", "kickspec", "kickall", "clearall", "setSpawn"));
         }
 
         return list.stream().filter(content -> content.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).sorted().toList();
