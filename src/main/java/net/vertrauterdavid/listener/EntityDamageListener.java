@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 public class EntityDamageListener implements Listener {
 
     @EventHandler
-    public void handle(EntityDamageEvent event) {
+    public void onEntityDamage(EntityDamageEvent event) {
         if (EventCore.getInstance().getConfig().getBoolean("Settings.DisableFallDamage", true)) {
             if (event.getCause() == EntityDamageByEntityEvent.DamageCause.FALL) {
                 event.setCancelled(true);

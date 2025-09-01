@@ -9,8 +9,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 public class BlockBreakListener implements Listener {
 
     @EventHandler
-    public void handle(BlockBreakEvent event) {
-        Player player = event.getPlayer();
+    public void onBlockBreak(BlockBreakEvent event) {
+        final Player player = event.getPlayer();
 
         if (player.hasPermission("event.bypass")) {
             event.setCancelled(false);

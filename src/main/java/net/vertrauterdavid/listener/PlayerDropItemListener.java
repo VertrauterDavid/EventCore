@@ -9,8 +9,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 public class PlayerDropItemListener implements Listener {
 
     @EventHandler
-    public void handle(PlayerDropItemEvent event) {
-        Player player = event.getPlayer();
+    public void onPlayerDropItem(PlayerDropItemEvent event) {
+        final Player player = event.getPlayer();
 
         if (EventCore.getInstance().getConfig().getBoolean("Settings.AllowItemDropBeforeStart")) return;
 

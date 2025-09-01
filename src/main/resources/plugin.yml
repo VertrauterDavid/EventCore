@@ -1,18 +1,34 @@
 name: EventCore
-version: 1.6
+version: 2.0
 api-version: 1.21
 main: net.vertrauterdavid.EventCore
 author: VertrauterDavid, JavaMio
-website: https://vertrauterdavid.net/ & https://github.com/vertrauterdavid/
+website: https://github.com/VertrauterDavid/ & https://github.com/MioArchive/
+folia-supported: true
 
 softdepend: [PlaceholderAPI]
+depend: [WorldEdit]
 
 commands:
-  announcement:
-  eventcore:
   event:
-  e:
+    description: "Main command used to manage the features of EventCore."
+    aliases: [eventcore, e]
+    permission: event.command
+
+  announcement:
+    description: "Sends a title message to all online players with the text you provide."
+    permission: event.command
+
   kit:
+    description: "Command to manage player kits, including creating, saving, giving, and enabling them."
+    aliases: [playerkit]
+    permission: event.command
+
   revive:
-  respawn:
+    description: "Brings a player back to life."
+    aliases: [respawn]
+    permission: event.command
+
   spawn:
+    description: "Teleports you to the spawn area during the preparation phase."
+    permission: event.spawn

@@ -7,10 +7,10 @@
 #     | |____   \ V /  |  __/ | | | | | |_  | |____  | (_) | | |    |  __/
 #     |______|   \_/    \___| |_| |_|  \__|  \_____|  \___/  |_|     \___|
 #
-#         Developed by VertrauterDavid
+#         Developed by VertrauterDavid & JavaMio
 #
-#         https://vertrauterdavid.net/
-#         https://github.com/VertrauterDavid/
+#         https://vertrauterdavid.net/ & https://mio.wtf/
+#         https://github.com/VertrauterDavid/ & https://github.com/MioArchive/
 #
 # ---------------------------------------------------------------------------
 
@@ -20,6 +20,7 @@ Settings:
   DisableFallDamage: true # Disable fall damage
   DisableItemExplosions: true # Disable item explosions for End Crystal
   HostRank:
+    Enabled: true
     Permission: "event.host" # Permission which is required to receive the host rank upon Join
     JoinCommand: "lp user %player% parent add host"
     QuitCommand: "lp user %player% parent remove host"

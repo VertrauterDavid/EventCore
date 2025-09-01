@@ -8,7 +8,7 @@ import org.bukkit.event.block.BlockExplodeEvent;
 public class BlockExplodeListener implements Listener {
 
     @EventHandler
-    public void handle(BlockExplodeEvent event) {
+    public void onBlockExplode(BlockExplodeEvent event) {
         event.blockList().forEach(block -> block.getDrops().clear());
         event.setCancelled(!(EventCore.getInstance().getGameManager().isRunning()));
     }

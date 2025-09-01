@@ -9,8 +9,8 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 public class PlayerPickupItemListener implements Listener {
 
     @EventHandler
-    public void handle(PlayerPickupItemEvent event) {
-        Player player = event.getPlayer();
+    public void onPlayerPickUpItem(PlayerPickupItemEvent event) {
+        final Player player = event.getPlayer();
 
         if (EventCore.getInstance().getConfig().getBoolean("Settings.AllowItemDropBeforeStart")) return;
 
