@@ -38,7 +38,6 @@ public class EventCore extends JavaPlugin {
         new EventCommand("event");
         new KitCommand("kit");
         new ReviveCommand("revive");
-        // new ReviveCommand("respawn");
         new SpawnCommand("spawn");
 
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), instance);

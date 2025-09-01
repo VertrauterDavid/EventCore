@@ -12,28 +12,23 @@ depend: [WorldEdit]
 commands:
   event:
     description: "Main command used to manage the features of EventCore."
-    usage: "/event <argument>"
     aliases: [eventcore, e]
     permission: event.command
 
   announcement:
     description: "Sends a title message to all online players with the text you provide."
-    usage: "/announcement <message>"
     permission: event.command
 
   kit:
     description: "Command to manage player kits, including creating, saving, giving, and enabling them."
-    usage: "/kit <argument>"
     aliases: [playerkit]
     permission: event.command
 
   revive:
     description: "Brings a player back to life."
-    usage: "/revive <player>"
     aliases: [respawn]
     permission: event.command
 
   spawn:
     description: "Teleports you to the spawn area during the preparation phase."
-    usage: "/spawn"
     permission: event.spawn
