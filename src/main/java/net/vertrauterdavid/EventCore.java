@@ -35,12 +35,10 @@ public class EventCore extends JavaPlugin {
         kitManager = new KitManager();
 
         new AnnoucementCommand("announcement");
-        new EventCommand("eventcore");
         new EventCommand("event");
-        new EventCommand("e");
         new KitCommand("kit");
         new ReviveCommand("revive");
-        new ReviveCommand("respawn");
+        // new ReviveCommand("respawn");
         new SpawnCommand("spawn");
 
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), instance);
@@ -80,6 +78,13 @@ public class EventCore extends JavaPlugin {
                     player.sendActionBar(MessageUtil.get("Messages.Actionbar.Message"));
                 }
             }, 0, 20);
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        if (gameManager.isRunning()) {
+            gameManager.stop(null);
         }
     }
 
