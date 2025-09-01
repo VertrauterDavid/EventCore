@@ -65,6 +65,16 @@ public class EventCommand implements CommandExecutor, TabCompleter {
                 return false;
             }
 
+            if (args[0].equalsIgnoreCase("reload")) {
+                double currentMS = System.currentTimeMillis();
+                EventCore.getInstance().reloadConfig();
+                double reloadMS = System.currentTimeMillis() - currentMS;
+
+                player.sendMessage(MessageUtil.getPrefix() + "§aYou successfully reloaded the config within " + reloadMS + "ms!");
+
+                return false;
+            }
+
             if (args[0].equalsIgnoreCase("setSpawn")) {
                 EventCore.getInstance().getMapManager().saveSpawnLocation(player);
                 player.sendMessage(MessageUtil.getPrefix() + "§aLocation saved!");
@@ -145,6 +155,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event reset");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event autoBorder <on / off>");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event setSpawn");
+        player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event reload");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event kickspec");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event kickall");
         player.sendMessage(MessageUtil.getPrefix() + "Usage: §c/event clearall");
@@ -170,7 +181,7 @@ public class EventCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            list.addAll(Arrays.asList("start", "stop", "drop", "reset", "autoBorder", "kickspec", "kickall", "clearall", "setSpawn"));
+            list.addAll(Arrays.asList("start", "stop", "drop", "reset", "autoBorder", "kickspec", "kickall", "clearall", "setSpawn", "reload"));
         }
 
         return list.stream().filter(content -> content.toLowerCase().startsWith(args[args.length - 1].toLowerCase())).sorted().toList();
